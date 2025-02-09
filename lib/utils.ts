@@ -17,7 +17,7 @@ export const convertFileSize = (sizeInBytes: number, digits?: number) => {
     return sizeInKB.toFixed(digits || 1) + " KB"; 
   } else if (sizeInBytes < 1024 * 1024 * 1024) {
     const sizeInMB = sizeInBytes / (1024 * 1024);
-    return sizeInMB.toFixed(digits || 1) + " MB";
+    return sizeInMB.toFixed(digits || 1) + " MB"; 
   } else {
     const sizeInGB = sizeInBytes / (1024 * 1024 * 1024);
     return sizeInGB.toFixed(digits || 1) + " GB"; 
@@ -25,7 +25,7 @@ export const convertFileSize = (sizeInBytes: number, digits?: number) => {
 };
 
 export const calculatePercentage = (sizeInBytes: number) => {
-  const totalSizeInBytes = 2 * 1024 * 1024 * 1024; // 2GB in bytes
+  const totalSizeInBytes = 2 * 1024 * 1024 * 1024; 
   const percentage = (sizeInBytes / totalSizeInBytes) * 100;
   return Number(percentage.toFixed(2));
 };
@@ -80,12 +80,12 @@ export const formatDateTime = (isoString: string | null | undefined) => {
 
   const date = new Date(isoString);
 
+
   let hours = date.getHours();
   const minutes = date.getMinutes();
   const period = hours >= 12 ? "pm" : "am";
 
   hours = hours % 12 || 12;
-
 
   const time = `${hours}:${minutes.toString().padStart(2, "0")}${period}`;
   const day = date.getDate();
@@ -113,6 +113,7 @@ export const getFileIcon = (
   type: FileType | string,
 ) => {
   switch (extension) {
+    // Document
     case "pdf":
       return "/assets/icons/file-pdf.svg";
     case "doc":
@@ -126,8 +127,10 @@ export const getFileIcon = (
     case "xls":
     case "xlsx":
       return "/assets/icons/file-document.svg";
+    // Image
     case "svg":
       return "/assets/icons/file-image.svg";
+    // Video
     case "mkv":
     case "mov":
     case "avi":
@@ -138,6 +141,7 @@ export const getFileIcon = (
     case "m4v":
     case "3gp":
       return "/assets/icons/file-video.svg";
+    // Audio
     case "mp3":
     case "mpeg":
     case "wav":
@@ -165,6 +169,7 @@ export const getFileIcon = (
       }
   }
 };
+
 export const constructFileUrl = (bucketFileId: string) => {
   return `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_APPWRITE_BUCKET}/files/${bucketFileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT}`;
 };
@@ -173,6 +178,7 @@ export const constructDownloadUrl = (bucketFileId: string) => {
   return `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_APPWRITE_BUCKET}/files/${bucketFileId}/download?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT}`;
 };
 
+// DASHBOARD UTILS
 export const getUsageSummary = (totalSpace: any) => {
   return [
     {

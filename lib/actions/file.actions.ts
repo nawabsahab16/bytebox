@@ -29,9 +29,13 @@ export const uploadFile = async ({
       ID.unique(),
       inputFile,
     );
+    
+    const fileType = getFileType(bucketFile.name).type;
+    const allowedTypes = ["documents", "image", "video", "audio", "other"];
+    const safeType = allowedTypes.includes(fileType) ? fileType : "other";
 
     const fileDocument = {
-      type: getFileType(bucketFile.name).type,
+      type: safeType,
       name: bucketFile.name,
       url: constructFileUrl(bucketFile.$id),
       extension: getFileType(bucketFile.name).extension,
@@ -212,7 +216,7 @@ export async function getTotalSpaceUsed() {
       audio: { size: 0, latestDate: "" },
       other: { size: 0, latestDate: "" },
       used: 0,
-      all: 2 * 1024 * 1024 * 1024 
+      all: 2 * 1024 * 1024 * 1024,
     };
 
     files.documents.forEach((file) => {

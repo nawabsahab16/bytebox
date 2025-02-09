@@ -22,20 +22,22 @@ import OtpModal from "@/components/OTPModal";
 
 type FormType = "sign-in" | "sign-up";
 
-const authFormSchema = (formType: FormType) => z.object({
-  email: z.string().email(),
-  fullName: formType === "sign-up"
-    ? z.string().min(2).max(50)
-    : z.string().optional(),
-});
+const authFormSchema = (formType: FormType) => {
+  return z.object({
+    email: z.string().email(),
+    fullName:
+      formType === "sign-up"
+        ? z.string().min(2).max(50)
+        : z.string().optional(),
+  });
+};
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
   const [accountId, setAccountId] = useState(null);
-  const formSchema = authFormSchema(type);
 
+  const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
