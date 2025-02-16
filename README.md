@@ -5,7 +5,13 @@
 <p>A seamless storage management and file-sharing platform that allows users to easily upload, organize, and share files with efficient access, collaboration, and management features.</p>
 
 <h2>DEMO:</h2>
-<p>Check out the live demo of the platform!</p>
+<p>Check out the live demo of the platform:
+</p>
+
+
+https://github.com/user-attachments/assets/2d738827-7be6-48d3-95e9-3d0c4433dc90
+
+
 
 <h2>🛠️ <strong>Features:</strong></h2>
 
